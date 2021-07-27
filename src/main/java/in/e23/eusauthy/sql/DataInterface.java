@@ -17,4 +17,6 @@ public interface DataInterface {
 
     boolean deletePlayer(UUID uuid); //请求输入玩家uuid和数据库类型进行删除
 
+    void release();
+
 }

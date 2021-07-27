@@ -5,9 +5,8 @@ import in.e23.eusauthy.cmd.CmdAuthy;
 import in.e23.eusauthy.lisenter.AuthyListener;
 import in.e23.eusauthy.sql.DataInterface;
 import in.e23.eusauthy.sql.SQLite;
-import in.e23.eusauthy.utils.Authenticator;
 import io.izzel.taboolib.loader.Plugin;
-import io.izzel.taboolib.module.dependency.*;
+import io.izzel.taboolib.module.dependency.Dependency;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,8 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
-import java.net.ConnectException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,11 +60,10 @@ public class EusAuthy extends Plugin {
                 break;
             case SQLite:
             default:
-                dataInterface = new SQLite();
-                SQLite.Api api = new SQLite.Api();
+                new SQLite();
+                dataInterface = SQLite.getInstance();
                 try {
-                    Connection con = api.getConnection();
-                    SQLite.createTable(con);
+                    SQLite.getInstance().createTable();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

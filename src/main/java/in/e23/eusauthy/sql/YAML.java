@@ -32,4 +32,8 @@ public class YAML implements DataInterface {
         return false;
     }
 
+    @Override
+    public void release() {
+    }
+
 }
