@@ -40,10 +40,10 @@ dependencies {
     //bstats
     taboo 'org.bstats:bstats-bukkit:1.8'
     //Lombok
-    compileOnly 'org.projectlombok:lombok:1.16.10'
-    annotationProcessor 'org.projectlombok:lombok:1.16.10'
-    testCompileOnly 'org.projectlombok:lombok:1.16.10'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.16.10'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+//    testCompileOnly 'org.projectlombok:lombok:1.16.10'
+//    testAnnotationProcessor 'org.projectlombok:lombok:1.16.10'
 }
 
 processResources {
