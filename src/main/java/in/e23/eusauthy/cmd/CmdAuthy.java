@@ -71,7 +71,7 @@ public class CmdAuthy implements TabExecutor {
                 if (!EusAuthy.getDataInterface().isPlayerRegistered(p.getUniqueId())) {
                     p.sendTitle(ChatColor.GREEN + "开始创建 ", ChatColor.DARK_GREEN + "请按照指示完成所有步骤", 5, 100, 5);
                     String secretKey = Authenticator.generateSecretKey();
-                    String url = Authenticator.getGoogleAuthenticatorQRCode(secretKey, EusAuthy.plugin.getServer().getName(), p.getName());
+                    String url = Authenticator.getGoogleAuthenticatorQRCode(secretKey, "斗鱼乐园", p.getName());
                     try {
                         Authenticator.createQRCode(url, EusAuthy.plugin.getDataFolder() + "/qrcode/", p.getUniqueId().toString() + ".png");
                     } catch (Exception e) {
@@ -86,7 +86,7 @@ public class CmdAuthy implements TabExecutor {
                                 "  " + secretKey + "\n" +
                                 "2. 在聊天框中输入即时验证码， 完成创建\n" +
                                 ChatColor.GREEN +
-                                "------------------- EusAuthy END -------------------\n"
+                                "------------------- END -------------------\n"
                         );
                         EusAuthy.secretKeyRAM.put(p, secretKey);
                         ItemStack map = new ItemStack(Material.MAP);
@@ -132,12 +132,12 @@ public class CmdAuthy implements TabExecutor {
                         p.getInventory().setItemInOffHand(map);
                         EusAuthy.isCreatingAuthy.put(p, true);
                     } else {
-                        p.sendMessage(ChatColor.RED + "请清空你副手上的物品以便设置 EusAuthy");
+                        p.sendMessage(ChatColor.RED + "请清空你副手上的物品以便设置二步验证");
                         return true;
                     }
                     return true;
                 } else {
-                    p.sendMessage(ChatColor.RED + "你已经设置 EusAuthy 了， 请删除后方可重置 EusAuthy");
+                    p.sendMessage(ChatColor.RED + "你已经设置二步验证了， 请删除后方可重置二步验证");
                     return true;
                 }
             } else {
@@ -150,18 +150,18 @@ public class CmdAuthy implements TabExecutor {
             if (sender instanceof Player && sender.hasPermission("authy.general")) {
                 Player p = (Player) sender;
                 if (EusAuthy.getDataInterface().isPlayerRegistered(p.getUniqueId())) {
-                    p.sendTitle(ChatColor.GOLD + "开始删除 EusAuthy", ChatColor.GREEN + "请按照指示完成所有步骤", 5, 100, 5);
+                    p.sendTitle(ChatColor.GOLD + "开始删除二步验证", ChatColor.GREEN + "请按照指示完成所有步骤", 5, 100, 5);
                     p.sendMessage(ChatColor.GOLD +
-                            "------------------ EusAuthy START ------------------\n" +
+                            "------------------ START ------------------\n" +
                             ChatColor.GRAY +
                             "1. 在聊天框中输入二步验证 APP 的验证码， 完成删除\n" +
                             ChatColor.GOLD +
-                            "------------------- EusAuthy END -------------------\n"
+                            "------------------- END -------------------\n"
                     );
                     EusAuthy.isDeletingAuthy.put(p, true);
                     return true;
                 } else {
-                    p.sendMessage(ChatColor.RED + "你尚未创建 EusAuthy");
+                    p.sendMessage(ChatColor.RED + "你尚未创建二步验证");
                     return true;
                 }
             } else {
@@ -171,17 +171,17 @@ public class CmdAuthy implements TabExecutor {
         }
         if (args[0].equalsIgnoreCase("help")) {
             sender.sendMessage(ChatColor.GREEN +
-                    "------------------ EusAuthy HELP ------------------\n" +
+                    "------------------ 二步验证 HELP ------------------\n" +
                     ChatColor.GRAY +
-                    "/authy create —— 创建 EusAuthy 二步验证\n" +
-                    "/authy delete —— 删除 EusAuthy 二步验证\n" +
-                    "/authy help —— 获取 EusAuthy 帮助\n" +
+                    "/authy create —— 创建二步验证\n" +
+                    "/authy delete —— 删除二步验证\n" +
+                    "/authy help —— 获取帮助\n" +
                     ChatColor.BLUE +
-                    "/authy remove <玩家名> —— 移除指定玩家 EusAuthy 二步验证\n" +
+                    "/authy remove <玩家名> —— 移除指定玩家二步验证\n" +
                     ChatColor.GRAY +
                     "/2fa <code> —— 登录时使用， 提供验证码以交互服务器\n" +
                     ChatColor.GREEN +
-                    "------------------ EusAuthy HELP -------------------\n"
+                    "------------------ 二步验证 HELP -------------------\n"
             );
             return true;
         }

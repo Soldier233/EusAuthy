@@ -12,11 +12,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import sun.jvm.hotspot.CommandProcessor;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,8 +64,31 @@ public class AuthyListener implements Listener {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                event.getPlayer().sendMessage(ChatColor.GOLD+"你还没创建完 EusAuthy 呢， 二维码已回收");
+                event.getPlayer().sendMessage(ChatColor.GOLD+"你还没创建完二步验证呢， 二维码已回收");
             }
+        }
+    }
+
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent event) {
+        if(event.getMessage().contains("2fa")){
+            return;
+        }
+        FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
+        String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
+        if (ramDataConfiguration.getBoolean(is2FAingKey)) {
+            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
+        String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
+        if (ramDataConfiguration.getBoolean(is2FAingKey)) {
+            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
+            event.setCancelled(true);
         }
     }
 
@@ -76,7 +98,7 @@ public class AuthyListener implements Listener {
         String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
         if (ramDataConfiguration.getBoolean(is2FAingKey)) {
             event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
-            event.setCancelled(true);
+            event.getPlayer().teleport(event.getFrom());
         }
     }
 
