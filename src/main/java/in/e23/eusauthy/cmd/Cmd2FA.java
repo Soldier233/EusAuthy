@@ -58,7 +58,7 @@ public class Cmd2FA implements TabExecutor {
                     return true;
                 }
             } else {
-                p.sendMessage(ChatColor.RED + "你还没有设置 EusAuthy，无需使用此命令");
+                p.sendMessage(ChatColor.RED + "你还没有设置二步验证，无需使用此命令");
                 return true;
             }
         } else {

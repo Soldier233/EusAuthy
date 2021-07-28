@@ -30,11 +30,11 @@ public class SQLite implements DataInterface {
         try {
             stat.executeUpdate(sql);
             stat.executeUpdate("CREATE UNIQUE INDEX IF NOT EXISTS EusAuthy_Index ON EusAuthy(uuid);");
+            stat.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.close();
         }
+
     }
 
     public void dropTable(Connection con) throws SQLException {
@@ -45,8 +45,6 @@ public class SQLite implements DataInterface {
             stat.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            con.close();
         }
     }
 
@@ -162,7 +160,11 @@ public class SQLite implements DataInterface {
 
     @Override
     public void release() {
-        
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

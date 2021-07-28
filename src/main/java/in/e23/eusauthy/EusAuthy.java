@@ -83,6 +83,7 @@ public class EusAuthy extends Plugin {
 
     @Override
     public void onDisable() {
+        dataInterface.release();
         getPlugin().getLogger().info("EusAuthy 卸载成功");
     }
 

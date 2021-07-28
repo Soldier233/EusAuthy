@@ -29,8 +29,8 @@ dependencies {
 //    compile 'ink.ptms.core:v11600:11600:all'
 //    compile 'ink.ptms.core:v11500:11500:all'
 //    compile 'ink.ptms.core:v11400:11400:all'
-    compile 'ink.ptms.core:v11300:11300:all'
-//    compile 'ink.ptms.core:v11200:11200:all'
+//    compile 'ink.ptms.core:v11300:11300:all'
+    compile 'ink.ptms.core:v11200:11200:all'
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     //Dependencies
     compile 'de.taimos:totp:1.0'
