@@ -77,7 +77,7 @@ public class AuthyListener implements Listener {
         FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
         String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
         if (ramDataConfiguration.getBoolean(is2FAingKey)) {
-            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
+            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢,请输入 /2fa 二步验证码");
             event.setCancelled(true);
         }
     }
@@ -87,7 +87,7 @@ public class AuthyListener implements Listener {
         FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
         String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
         if (ramDataConfiguration.getBoolean(is2FAingKey)) {
-            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
+            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢,请输入 /2fa 二步验证码");
             event.setCancelled(true);
         }
     }
@@ -97,7 +97,7 @@ public class AuthyListener implements Listener {
         FileConfiguration ramDataConfiguration = AuthyUtils.ramdata();
         String is2FAingKey = event.getPlayer().getUniqueId().toString()+"."+"is2FAing";
         if (ramDataConfiguration.getBoolean(is2FAingKey)) {
-            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢， 请输入二步验证码");
+            event.getPlayer().sendMessage(ChatColor.RED+"你还没有验证呢,请输入 /2fa 二步验证码");
             event.getPlayer().teleport(event.getFrom());
         }
     }
